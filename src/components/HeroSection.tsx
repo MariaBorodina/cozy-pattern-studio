@@ -1,3 +1,5 @@
+import heroImage from "@/assets/hero-knitting.jpg";
+
 export function HeroSection() {
   return (
     <section className="mb-24 flex flex-col lg:flex-row gap-16 items-center">
@@ -36,7 +38,7 @@ export function HeroSection() {
         <div className="absolute bottom-0 left-0 size-4 border-b-2 border-l-2 border-leather/20" />
         <div className="absolute bottom-0 right-0 size-4 border-b-2 border-r-2 border-leather/20" />
         <img
-          src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=900&h=600&fit=crop"
+          src={heroImage}
           className="w-full aspect-[4/3] object-cover sepia-[.30] contrast-125 mix-blend-multiply opacity-90"
           loading="lazy"
           alt="Featured knitting pattern"
