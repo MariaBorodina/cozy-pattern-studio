@@ -40,7 +40,7 @@ export const Route = createFileRoute("/patterns/$slug")({
 });
 
 function PatternDetail() {
-  const pattern = Route.useLoaderData();
+  const pattern = Route.useLoaderData() as NonNullable<ReturnType<typeof getPatternBySlug>>;
 
   const difficultyDescription: Record<string, string> = {
     Apprentice: "Suitable for beginners. Basic stitches and simple construction.",
