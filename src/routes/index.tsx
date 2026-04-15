@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Explore a curated catalogue of heirloom knitting patterns. Cozy designs rooted in tradition, from Shetland cables to Nordic colorwork.",
+          "Explore a curated catalogue of heirloom knitting patterns. Designs rooted in the quiet rhythm of the stitch.",
       },
     ],
   }),
@@ -19,16 +19,16 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-dvh bg-paper text-ink font-serif antialiased selection:bg-terracotta/20">
+    <div className="min-h-dvh bg-linen text-stone antialiased selection:bg-moss/20">
       <SiteHeader />
-      <main className="w-full max-w-[1440px] mx-auto px-8 lg:px-16 py-16">
+      <main className="w-full max-w-[1440px] mx-auto">
         <HeroSection />
         <PatternCatalogue />
       </main>
-      <footer className="w-full max-w-[1440px] mx-auto px-8 lg:px-16 py-12 border-t border-linen">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 font-sans text-xs text-ink/40">
+      <footer className="w-full max-w-[1440px] mx-auto px-8 md:px-16 py-12 border-t border-wool">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-stone/40 tracking-wider">
           <span>© 2026 Hearth &amp; Skein. All patterns archived with care.</span>
-          <span className="uppercase tracking-widest">Made with wool &amp; patience</span>
+          <span className="uppercase">Made with wool &amp; patience</span>
         </div>
       </footer>
     </div>

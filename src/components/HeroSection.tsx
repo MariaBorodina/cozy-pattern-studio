@@ -2,47 +2,38 @@ import heroImage from "@/assets/hero-knitting.jpg";
 
 export function HeroSection() {
   return (
-    <section className="mb-24 flex flex-col lg:flex-row gap-16 items-center">
-      <div className="flex-1 flex flex-col gap-6">
-        <span className="font-sans text-xs font-medium uppercase tracking-widest text-sage">
-          From the vault
-        </span>
-        <h2 className="text-5xl lg:text-6xl font-medium tracking-tight text-balance leading-[1.1] text-ink">
-          The Cabled <br />Fisherman's Wrap
-        </h2>
-        <p className="text-lg text-ink/80 max-w-[45ch] text-pretty leading-relaxed mb-4">
-          Originally transcribed in 1962 from a weathered notebook found in a
-          coastal cottage. This pattern employs a complex twisted rib to block
-          the salt winds.
+    <section className="grid grid-cols-1 md:grid-cols-12 gap-12 px-8 md:px-16 pt-16 pb-32 items-start">
+      <div className="md:col-span-5 md:col-start-2 pt-24">
+        <p className="text-xs uppercase tracking-[0.2em] text-moss mb-8">
+          &mdash; Volume IV
         </p>
-        <div className="flex items-center gap-6 font-sans text-sm">
-          <button className="bg-terracotta text-cream px-6 py-3 hover:bg-leather transition-colors duration-300">
-            View Pattern
-          </button>
-          <div className="flex gap-4 text-ink/60 border-l border-linen pl-6">
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wider mb-0.5">Needles</span>
-              <span className="font-medium text-ink">US 8 (5.0mm)</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wider mb-0.5">Yarn</span>
-              <span className="font-medium text-ink">Worsted</span>
-            </div>
-          </div>
-        </div>
+        <h1 className="text-5xl md:text-6xl text-balance leading-[1.15] mb-12 font-serif text-stone">
+          Formed by hand,<br />shaped by time.
+        </h1>
+        <p className="text-stone/70 text-lg leading-relaxed max-w-[40ch] text-pretty font-light mb-16">
+          Embrace the quiet rhythm of the stitch. A collection of knitwear
+          patterns inspired by the subtle irregularities of nature and the
+          warmth of unbleached fibers.
+        </p>
+        <a
+          href="#catalogue"
+          className="text-sm uppercase tracking-[0.15em] border-b border-stone/30 pb-2 hover:border-stone transition-colors inline-block"
+        >
+          Explore the collection
+        </a>
       </div>
-      <div className="flex-1 w-full bg-linen p-4 relative">
-        {/* Decorative photo corners */}
-        <div className="absolute top-0 left-0 size-4 border-t-2 border-l-2 border-leather/20" />
-        <div className="absolute top-0 right-0 size-4 border-t-2 border-r-2 border-leather/20" />
-        <div className="absolute bottom-0 left-0 size-4 border-b-2 border-l-2 border-leather/20" />
-        <div className="absolute bottom-0 right-0 size-4 border-b-2 border-r-2 border-leather/20" />
-        <img
-          src={heroImage}
-          className="w-full aspect-[4/3] object-cover sepia-[.30] contrast-125 mix-blend-multiply opacity-90"
-          loading="lazy"
-          alt="Featured knitting pattern"
-        />
+      <div className="md:col-span-5 md:col-start-8 md:-mt-8">
+        <div className="bg-wool aspect-[4/5] overflow-hidden">
+          <img
+            src={heroImage}
+            loading="lazy"
+            alt="Knitted texture detail"
+            className="w-full h-full object-cover grayscale-[20%] hover:scale-105 transition-transform duration-[2s] ease-out"
+          />
+        </div>
+        <div className="text-right mt-4 text-xs tracking-wider text-stone/60">
+          01. Raw wool, undyed.
+        </div>
       </div>
     </section>
   );

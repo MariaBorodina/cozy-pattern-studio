@@ -1,13 +1,16 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getPatternBySlug } from "@/data/patterns";
+import { getPatternBySlug, type Pattern } from "@/data/patterns";
 
 function NotFoundPattern() {
   return (
-    <div className="min-h-dvh bg-paper text-ink font-serif flex items-center justify-center">
+    <div className="min-h-dvh bg-linen text-stone flex items-center justify-center">
       <div className="text-center">
-        <h1 className="text-4xl font-medium mb-4">Pattern Not Found</h1>
-        <p className="text-ink/60 italic mb-8">This pattern may have been lost to time.</p>
-        <Link to="/" className="font-sans text-xs uppercase tracking-widest text-terracotta hover:text-leather transition-colors">
+        <h1 className="text-4xl font-serif mb-4">Pattern Not Found</h1>
+        <p className="text-stone/60 mb-8">This pattern may have been lost to time.</p>
+        <Link
+          to="/"
+          className="text-sm uppercase tracking-[0.15em] border-b border-stone/30 pb-2 hover:border-stone transition-colors"
+        >
           ← Return to Archive
         </Link>
       </div>
@@ -27,8 +30,6 @@ export const Route = createFileRoute("/patterns/$slug")({
           name: "description",
           content: pattern?.description ?? "Knitting pattern from the Hearth & Skein archive.",
         },
-        { property: "og:title", content: pattern ? `${pattern.title} — Hearth & Skein` : "Pattern Not Found" },
-        { property: "og:description", content: pattern?.description ?? "" },
       ],
     };
   },
@@ -40,98 +41,86 @@ export const Route = createFileRoute("/patterns/$slug")({
 });
 
 function PatternDetail() {
-  const pattern = Route.useLoaderData() as NonNullable<ReturnType<typeof getPatternBySlug>>;
-
-  const difficultyDescription: Record<string, string> = {
-    Apprentice: "Suitable for beginners. Basic stitches and simple construction.",
-    Journeyman: "Intermediate skills required. Includes shaping and texture patterns.",
-    Master: "Advanced techniques. Requires experience with complex stitch patterns.",
-  };
+  const pattern = Route.useLoaderData() as Pattern;
 
   return (
-    <div className="min-h-dvh bg-paper text-ink font-serif antialiased selection:bg-terracotta/20">
-      {/* Header */}
-      <header className="w-full max-w-[1440px] mx-auto px-8 lg:px-16 py-6">
+    <div className="min-h-dvh bg-linen text-stone antialiased selection:bg-moss/20">
+      {/* Back link */}
+      <header className="px-8 md:px-16 pt-12 pb-8">
         <Link
           to="/"
-          className="font-sans text-xs uppercase tracking-widest text-ink/50 hover:text-terracotta transition-colors"
+          className="text-sm uppercase tracking-[0.15em] text-stone/50 hover:text-stone transition-colors"
         >
           ← Back to Archive
         </Link>
       </header>
 
-      <main className="w-full max-w-[1440px] mx-auto px-8 lg:px-16 pb-16">
-        {/* Hero */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-20">
-          <div className="bg-linen p-3">
-            <div className="aspect-[3/4] overflow-hidden">
+      <main className="w-full max-w-[1440px] mx-auto px-8 md:px-16 pb-16">
+        {/* Hero grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-32">
+          {/* Image */}
+          <div className="md:col-span-6 md:col-start-1">
+            <div className="bg-wool aspect-[4/5] overflow-hidden">
               <img
                 src={pattern.imageUrl}
                 alt={pattern.title}
-                className="w-full h-full object-cover sepia-[.20] mix-blend-multiply"
+                className="w-full h-full object-cover grayscale-[15%]"
               />
+            </div>
+            <div className="text-right mt-4 text-xs tracking-wider text-stone/50">
+              {pattern.origin}
             </div>
           </div>
 
-          <div className="flex flex-col justify-center">
-            <span className="font-sans text-[10px] uppercase tracking-widest text-terracotta mb-3">
-              {pattern.origin}
-            </span>
-            <h1 className="text-4xl md:text-5xl font-medium leading-tight mb-4 text-ink">
+          {/* Details */}
+          <div className="md:col-span-5 md:col-start-8 flex flex-col justify-center">
+            <p className="text-xs uppercase tracking-[0.2em] text-moss mb-6">
+              &mdash; {pattern.category}
+            </p>
+            <h1 className="text-4xl md:text-5xl leading-[1.15] mb-6 font-serif text-stone">
               {pattern.title}
             </h1>
-            <p className="text-lg italic text-ink/70 mb-8">{pattern.description}</p>
-
-            {/* Difficulty */}
-            <div className="border-t border-linen pt-6 mb-8">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="font-sans text-[10px] uppercase tracking-widest text-ink/50">
-                  Difficulty
-                </span>
-                <span className={`font-sans text-xs uppercase tracking-widest font-medium ${pattern.difficultyColor}`}>
-                  {pattern.difficulty}
-                </span>
-              </div>
-              <p className="text-sm text-ink/60 italic">
-                {difficultyDescription[pattern.difficulty]}
-              </p>
-            </div>
+            <p className="text-stone/70 text-lg leading-relaxed mb-12 font-light">
+              {pattern.description}
+            </p>
 
             {/* Specs */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-5 border-t border-linen pt-6">
+            <dl className="space-y-4 border-t border-wool pt-8">
               {[
+                ["Difficulty", pattern.difficulty],
                 ["Yarn Weight", pattern.yarnWeight],
                 ["Yardage", pattern.yarnAmount],
                 ["Needles", pattern.needleSize],
                 ["Gauge", pattern.gauge],
                 ["Finished Size", pattern.finishedSize],
-                ["Category", pattern.category],
               ].map(([label, value]) => (
-                <div key={label}>
-                  <dt className="font-sans text-[10px] uppercase tracking-widest text-ink/50 mb-1">
+                <div key={label} className="flex justify-between items-baseline">
+                  <dt className="text-xs uppercase tracking-widest text-stone/50">
                     {label}
                   </dt>
-                  <dd className="text-sm text-ink/80">{value}</dd>
+                  <dd className="text-sm text-stone/80 text-right max-w-[60%]">
+                    {value}
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
         </div>
 
         {/* Instructions */}
         <section className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-medium tracking-tight text-ink mb-2">Instructions</h2>
-          <p className="text-ink/50 italic text-sm mb-10">
+          <h2 className="text-3xl font-serif text-stone mb-2">Instructions</h2>
+          <p className="text-stone/50 text-sm mb-12">
             Follow each step carefully. Refer to gauge swatch before beginning.
           </p>
 
           <ol className="space-y-8">
             {pattern.instructions.map((step: string, i: number) => (
-              <li key={i} className="flex gap-6">
-                <span className="font-sans text-xs text-terracotta/60 font-medium tabular-nums pt-1 shrink-0 w-6 text-right">
+              <li key={i} className="flex gap-8">
+                <span className="text-xs text-moss tabular-nums pt-1 shrink-0 w-6 text-right tracking-widest">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="text-ink/80 leading-relaxed border-b border-linen/80 pb-8 flex-1">
+                <p className="text-stone/70 leading-relaxed border-b border-wool/60 pb-8 flex-1">
                   {step}
                 </p>
               </li>
@@ -140,10 +129,10 @@ function PatternDetail() {
         </section>
       </main>
 
-      <footer className="w-full max-w-[1440px] mx-auto px-8 lg:px-16 py-12 border-t border-linen">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 font-sans text-xs text-ink/40">
+      <footer className="w-full max-w-[1440px] mx-auto px-8 md:px-16 py-12 border-t border-wool">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-stone/40 tracking-wider">
           <span>© 2026 Hearth &amp; Skein. All patterns archived with care.</span>
-          <span className="uppercase tracking-widest">Made with wool &amp; patience</span>
+          <span className="uppercase">Made with wool &amp; patience</span>
         </div>
       </footer>
     </div>
