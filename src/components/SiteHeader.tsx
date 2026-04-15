@@ -2,26 +2,22 @@ import { Link } from "@tanstack/react-router";
 
 export function SiteHeader() {
   return (
-    <header className="w-full max-w-[1440px] mx-auto px-8 lg:px-16 pt-10 pb-8 flex justify-between items-end border-b border-linen">
-      <div className="flex flex-col gap-1">
-        <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-ink/50">
-          Established 1984
-        </span>
-        <Link to="/" className="text-3xl font-medium tracking-tight text-ink">
+    <header className="flex justify-between items-center px-8 md:px-16 pt-12 pb-8">
+      <div className="text-2xl tracking-wide font-serif text-stone">
+        <Link to="/" className="no-underline text-stone">
           Hearth &amp; Skein
         </Link>
       </div>
-      <nav className="hidden md:flex gap-10 font-sans text-xs uppercase tracking-widest text-ink/70">
+      <nav className="hidden md:flex gap-10 text-sm uppercase tracking-widest text-stone/70 font-medium">
         <Link
           to="/"
-          activeProps={{ className: "text-terracotta border-b border-terracotta/30 pb-1" }}
-          className="transition-colors hover:text-ink"
+          activeProps={{ className: "text-stone border-b border-stone/40 pb-1" }}
+          className="transition-colors hover:text-stone"
         >
-          The Archive
+          Catalogue
         </Link>
-        <span className="cursor-pointer hover:text-ink transition-colors">Techniques</span>
-        <span className="cursor-pointer hover:text-ink transition-colors">Yarn Weights</span>
-        <span className="cursor-pointer hover:text-ink transition-colors">Journal</span>
+        <span className="cursor-pointer hover:text-stone transition-colors">Journal</span>
+        <span className="cursor-pointer hover:text-stone transition-colors">About</span>
       </nav>
     </header>
   );
