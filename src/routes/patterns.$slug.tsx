@@ -126,7 +126,7 @@ function PatternDetail() {
           </p>
 
           <ol className="space-y-8">
-            {pattern.instructions.map((step, i) => (
+            {pattern.instructions.map((step: string, i: number) => (
               <li key={i} className="flex gap-6">
                 <span className="font-sans text-xs text-terracotta/60 font-medium tabular-nums pt-1 shrink-0 w-6 text-right">
                   {String(i + 1).padStart(2, "0")}
